@@ -17,5 +17,26 @@
   display: block;
   position: absolute;
   top: 50%;
+  margin-top: -77px;
   width: 100%;
+}
+
+.top-left-div {
+  display: block;
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 30px;
+}
+
+.white {
+  color: #FFFFFF;
+}
+
+.light-yellow{
+  color: #F5E06C;
+
+}
+
+.shadowed-text{
+  text-shadow: 4px 4px 6px #000000;
 }
