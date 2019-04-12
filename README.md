@@ -16,7 +16,10 @@ show_header: false
   <br>
   <a href="https://github.com/tsrivishnu">Github</a>
   ·
-  <a href="https://twitter/tsrivishnu">Twitter</a>
+  <a href="https://twitter.com/tsrivishnu">Twitter</a>
+  <br/>
+  <br/>
+  <a href="/presentations">Presentations/Talks</a>
 </p>
 
 ### Projects
@@ -37,5 +40,3 @@ Cron job to update a dynamic DNS records on Hurrican Electic
 ####  [SSL Wildcard on Pi](https://github.com/tsrivishnu/pi-ssl-wildcard-certs)
 
 Generate wildcard SSL certificates using Letsencrypt and Certbot on RaspberryPi for domains managed by Digitalocean.
-
-{% include_relative presentations/index.md %}
