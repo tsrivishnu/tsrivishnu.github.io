@@ -1,3 +1,7 @@
+---
+show_header: false
+---
+
 <p align="center">
   <a href="https://srivishnu.totakura.in">
     <img src="assets/images/sri-vishnu-totakura.jpg" alt="Sri Vishnu Totakura" width="72" height="72">
