@@ -4,6 +4,7 @@ url: https://srivishnu.totakur.in
 
 google_analytics: UA-138258334-1
 theme: jekyll-theme-primer
+show_header: false
 
 twitter:
   username: tsrivishnu
