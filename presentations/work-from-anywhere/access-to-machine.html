@@ -1,0 +1,180 @@
+<section data-markdown>
+  <textarea data-template>
+    Access to machine.
+  </textarea>
+</section>
+
+
+<section>
+  SSH
+</section>
+
+<section>
+  SSH port forwarding on router.
+  <br/>
+  <br/>
+  <br/>
+  <small>
+    If only its that simple!
+  </small>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    SSH port forwarding on router.
+
+    * Network you control.
+    * Network has public IP.
+  </textarea>
+</section>
+
+<section>
+    But, Dynamic IP
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    Which IP to connect?
+
+    * DynDNS on a _domain you own_.
+      * Most providers support this,
+      * if not, create a zone on [HurricaneElectric](https://dns.he.net). Its free!
+
+    * Most routers support updating DynDNS.
+      * if not, run a cron on your machine.
+
+    ```bash
+      curl -k -4 \
+      "https://vishnu.in:pswd@dyn.dns.he.net/nic/update?hostname=vishnu.in"
+    ```
+
+    Cron setup: [tsrivishnu/dynamic-dns-he](https://github.com/tsrivishnu/dynamic-dns-he)
+  </textarea>
+</section>
+
+
+<section data-markdown>
+  <textarea data-template>
+    But, is your work machine **_always_** in a **_network you control_**?
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    Tunnel to your work machine.
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    Tunnel to your work machine.
+
+    * Needs a network you own with public IP
+      * usual DNS home internet.
+
+    * A device that is always on
+      * a RaspberryPi.
+
+    * Tunneling tool.
+      * What now?
+  </textarea>
+</section>
+
+<section>
+  Pagekite
+  <br/>
+  <small>
+    The fast, reliable localhost tunneling solution.
+    <br/>
+    <br/>
+    <a href="https://pagekite.net">
+      https://pagekite.net
+    </a>
+  </small>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    * Front-end
+      * Reachable via a public IP.
+      * Example: RaspberryPi at Home
+
+    * Back-end
+      * Any network.
+      * Don't know public IP.
+      * Example: Work machine.
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    <h3> Front End </h3>
+
+    - Define your kites
+
+      ```bash
+      # /etc/pagekite.d/20_frontends.rc
+
+      isfrontend
+      rawports=virtual
+
+      ports=8000,9000,3000,2222,9222
+      protos=https,raw
+
+      # domain = <protocol-port> : kite-name : password
+      domain = https-3000,raw-2222 : machine1.kites.vishnu.in : password01
+      domain = raw-9222 : machine2.kites.vishnu.in : password02
+      ```
+    - Forward above ports on your router.
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    Backend
+
+    - Set the kite
+    ```bash
+    # /etc/pagekite.d/10_account.rc
+    kitename   = machine1.kites.vishnu.in
+    kitesecret = password01
+    ```
+    - Set the front-end
+    ```bash
+    # /etc/pagekite.d/20_frontends.rc
+    frontend = kites.vishnu.in:9000
+    ```
+    - Create  a new file:
+    ```bash
+    # /etc/pagekite.d/custom.rc
+    # SSH
+    service_on = raw-9222:@kitename : 127.0.0.1:22   : @kitesecret
+    # VPN
+    service_on = raw-9194:@kitename : localhost:1194 : @kitesecret
+    ```
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    SSH
+    ```console
+    $ ssh user@machine1.kites.vishnu.in \
+      -p 9222 \
+      -o ProxyCommand='nc -X connect -x %h:9222 %h %p'
+    ```
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    Now, you can reach that machine
+    * from anywhere
+    * and, where ever that machine is!
+  </textarea>
+</section>
