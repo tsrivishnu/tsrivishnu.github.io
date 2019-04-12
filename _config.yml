@@ -1,5 +1,18 @@
 title: Sri Vishnu Totakura
-description: Ruby Engineer, Germany, Planet Earth
+description: Senior Ruby Engineer, Munich, Germany, Planet Earth
+url: https://srivishnu.totakur.in
+
 google_analytics: UA-138258334-1
 theme: jekyll-theme-primer
 show_header: false
+
+twitter:
+  username: tsrivishnu
+  card: summary
+
+social:
+  name: Sri Vishnu Totakura
+  links:
+    - https://twitter.com/tsrivishnu
+    - https://github.com/tsrivishnu
+    - https://www.linkedin.com/in/tsrivishnu/
