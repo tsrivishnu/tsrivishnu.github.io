@@ -123,12 +123,13 @@
       isfrontend
       rawports=virtual
 
-      ports=8000,9000,3000,2222,9222
+      # 9000 is the control port. Doesn't run any services on that.
+      ports=9000,9194,9222,2222
       protos=https,raw
 
       # domain = <protocol-port> : kite-name : password
-      domain = https-3000,raw-2222 : machine1.kites.vishnu.in : password01
-      domain = raw-9222 : machine2.kites.vishnu.in : password02
+      domain = https-9194,raw-9222 : machine1.kites.vishnu.in : password01
+      domain = raw-2222 : machine2.kites.vishnu.in : password02
       ```
     - Forward above ports on your router.
   </textarea>
