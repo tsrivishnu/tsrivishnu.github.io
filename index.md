@@ -11,10 +11,12 @@ show_header: false
 <h3 align="center">Sri Vishnu Totakura</h3>
 
 <p align="center">
-  Ruby Engineer, Munich, Planet Earth
+  Tech Enthusiast, Ruby Engineer, Munich, Planet Earth
   <br>
   <br>
   <a href="https://github.com/tsrivishnu">Github</a>
+  ·
+  <a href="https://www.linkedin.com/in/tsrivishnu/">LinkedIn</a>
   ·
   <a href="https://twitter.com/tsrivishnu">Twitter</a>
   <br/>
