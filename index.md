@@ -31,14 +31,23 @@ show_header: false
 Ruby gem to integrate Alexa with your Rails application and serve Alexa
 requests just like how you serve other HTML in rails.
 
+`ruby` `Ruby on rails`
+
 #### [DigitalOcean torrent downloader](https://github.com/tsrivishnu/DO-torrent-downloader)
 
 Program to start a DigitalOcean droplet, download torrents on it, copy them to your local machine and delete the droplet.
+
+`golang`
 
 #### [Dynamic DNS - HurricaneElectric](https://github.com/tsrivishnu/dynamic-dns-he)
 
 Cron job to update a dynamic DNS records on Hurrican Electic
 
-####  [SSL Wildcard on Pi](https://github.com/tsrivishnu/pi-ssl-wildcard-certs)
+`shell` `Dynamic DNS`
 
-Generate wildcard SSL certificates using Letsencrypt and Certbot on RaspberryPi for domains managed by Digitalocean.
+
+####  [Certbot Manager](https://github.com/tsrivishnu/rpi-certbot-manager)
+
+Easily Generate and manager wildcard SSL certificates using Letsencrypt and Certbot on RaspberryPi for domains managed under Digitalocean.
+
+`shell` `cron` `docker` `letsencrypt` `RaspberryPi`
