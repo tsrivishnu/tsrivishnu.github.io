@@ -1,0 +1,19 @@
+version: '3.2'
+services:
+  site:
+    build: .
+    ports:
+      - "5000:4000"
+    hostname: "site"
+    environment:
+      - "BUNDLE_PATH=/app/.bundle"
+    volumes:
+      - type: bind
+        source: $PWD
+        target: /app
+        volume:
+          nocopy: true
+        consistency: cached
+    tty: true
+    working_dir: "/app"
+    command: "bundle exec jekyll serve -H 0.0.0.0"
