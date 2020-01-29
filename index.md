@@ -22,6 +22,8 @@ show_header: false
   <br/>
   <br/>
   <a href="/presentations">Presentations/Talks</a>
+  ·
+  <a href="/articles">Articles</a>
 </p>
 
 ### Projects
