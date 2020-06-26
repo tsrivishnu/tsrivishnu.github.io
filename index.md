@@ -28,6 +28,14 @@ show_header: false
 
 ### Projects
 
+#### [ZAGE](https://www.zage.life)
+
+Professional career development app that will get you the most relevant content based on
+your needs and preferences.
+
+`Ruby on rails` `Elasticsearch` `Kafka` `Docker`
+
+
 #### [alexa-rails](https://github.com/tsrivishnu/alexa-rails)
 
 Ruby gem to integrate Alexa with your Rails application and serve Alexa
