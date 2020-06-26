@@ -30,8 +30,9 @@ show_header: false
 
 #### [ZAGE](https://www.zage.life)
 
-Professional career development app that will get you the most relevant content based on
-your needs and preferences.
+App to get you the most relevant, up-to-date and expert curated content
+tailored for you.
+One place to find all the content you need for advancing in your career.
 
 `Ruby on rails` `Elasticsearch` `Kafka` `Docker`
 
