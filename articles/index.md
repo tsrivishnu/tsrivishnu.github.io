@@ -10,6 +10,8 @@ Articles that I authored on different platforms.
 When I started a new Rails 6 project, as a primarily backend developer, I found it intimidating to start developing with Webpack.
 These are some resources that helped me through to get familiar with Webpack, Webpacker and how to develop with them.
 
+`WEBPACK` `WEBPACKER` `RAILS`
+
 ### [Increasing `fs.inotify.max_user_watches` for Docker images](https://gist.github.com/tsrivishnu/9f551ef0098021a913e01d6d594c555d)
 You can't set those for an image during build time becasue Docker takes the sysctl configuration from the Host. So, set the config on your host machine...
 
