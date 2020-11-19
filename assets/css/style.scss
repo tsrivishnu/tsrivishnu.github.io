@@ -1,0 +1,10 @@
+---
+---
+
+@import "{{ site.theme }}";
+@import "theme/index";
+@import "custom-highlight";
+
+@media (prefers-color-scheme: dark) {
+  @import "dark-theme/index";
+}
