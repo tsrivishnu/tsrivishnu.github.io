@@ -4,7 +4,13 @@ title: Posts
 
 ## Posts
 
-Articles that I authored on different platforms.
+{% for post in site.posts %}
+### [{{ post.title }}]({{ post.url }})
+{{ post.description }}
+
+{% for tag in post.tags %}`{{ tag | upcase }}` {% endfor %}
+
+{% endfor %}
 
 ### [Resources to get familiar with Webpacker, Webpack and Rails](https://gist.github.com/tsrivishnu/94b6334eefe2a23afbabba1a65591bb6)
 When I started a new Rails 6 project, as a primarily backend developer, I found it intimidating to start developing with Webpack.
