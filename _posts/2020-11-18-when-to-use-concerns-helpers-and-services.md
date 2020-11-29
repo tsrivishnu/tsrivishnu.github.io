@@ -2,6 +2,8 @@
 title: When to use Concerns, Helpers and Services
 description: Summarizing some issues that I noticed in my experience or while reading about these topics and the approach I take to deciding on when to use Conerns, Helpers and Services during development or refactoring.
 tags: ["Ruby on Rails", "Architecture"]
+author: Sri Vishnu Totakura
+layout: post
 ---
 
 # When to use Concerns, Helpers and Services
