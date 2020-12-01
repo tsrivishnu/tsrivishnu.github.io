@@ -18,6 +18,10 @@ article .meta .tags code {
   margin-right: 0.3rem;
 }
 
-article .meta + h1 {
+article .meta h1.title {
   margin-top: 0px;
+}
+
+article .meta h1.title p {
+  margin-bottom: 0px;
 }

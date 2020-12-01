@@ -6,8 +6,6 @@ author: Sri Vishnu Totakura
 layout: post
 ---
 
-# When to use Concerns, Helpers and Services
-
 As a Ruby on Rails developer, you will need to make decisions to move some code into concerns, helpers, modules, classes or maybe also services. As I started developing in Ruby on Rails, I wasn't always sure what to choose in such cases and I always found myself making a decision and later changing it to something else. From my experience and some reading, I gained some insights and formed opinions on when to use one of these in my applications and I tried to write them down in this article.
 
 I tried to summarise the basic use-cases of classes, modules (helpers, concerns) and services along with some considerations to make sure you are not making decisions that will come to bite you back in the future.

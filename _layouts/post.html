@@ -7,6 +7,7 @@ layout: default
     <time datetime="{{ page.date | date_to_string }}">
       {{ page.date | date_to_string }}
     </time>
+    <h1 class="title">{{ page.title | markdownify }}</h1>
   </div>
   {{ content }}
 </article>
