@@ -99,7 +99,7 @@ end
 
 # is same as
 
-before(:all) do
+before do
   ...
 end
 ```
