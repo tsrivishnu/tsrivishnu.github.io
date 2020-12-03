@@ -7,7 +7,7 @@ layout: post
 ---
 
 These helper methods are very commonly used in RSpec.
-They are similar yet, very different.
+They are similar yet very different.
 In this article, I will go through their basic behaviour with some examples
 and show how they can work together.
 
@@ -18,7 +18,7 @@ that takes just two minutes to read:
 
 ## `before(:all)`
 
-The block defined with `before(:all)`, is run before all the examples within a group.
+The block defined with `before(:all)` is run before all the examples within a group.
 In other words, its only run once for all the examples inside the group.
 
 Take the below example:
@@ -49,8 +49,7 @@ Running +before(:all)+ block for #<RSpec::ExampleGroups::ExplainBeforeAll::Group
 Finished in 0.00178 seconds (files took 0.43658 seconds to load)
 3 examples, 0 failures
 ```
-When you run the above spec, `"Running +before(:each)+ block"` if printed twice.
-Once for example 1 and once for example 2.
+When you run the above spec, `"Running +before(:each)+ block"` is printed once.
 
 ## `before(:each)`
 
@@ -85,7 +84,7 @@ Finished in 0.00308 seconds (files took 0.32345 seconds to load)
 3 examples, 0 failures
 ```
 
-When you run the above spec, `"Running +before(:each)+ block"` if printed twice.
+When you run the above spec, `"Running +before(:each)+ block"` is printed twice.
 Once for example 1 and once for example 2.
 
 #### default
@@ -96,9 +95,7 @@ Once for example 1 and once for example 2.
 before(:each) do
   ...
 end
-
 # is same as
-
 before do
   ...
 end
@@ -107,8 +104,8 @@ end
 ## `let`
 A `let` block lets you define a helper method that is available in RSpec group's
 examples.
-The block passed to the `let` is evaluated will be the value returned by the
-helper method defined.
+The block passed to `let` is evaluated and the return value of the block will be 
+the value returned by the helper method defined.
 For example:
 
 ```ruby
@@ -136,22 +133,18 @@ Take the following spec for example:
 
 ```ruby
 RSpec.describe "explaining +let+" do
-  let(:my_int) { double(:my_int, value: 3, to_s: "3") }
+  let(:my_int) { 3 }
 
-  describe "group with +let+" do
-    let(:int_as_string) {  my_int.to_s }
+  describe "as string" do
+    let(:int_as_string) {
+      puts "in the +let+ block"
+      my_int.to_s
+    }
 
-    context "when referencing +int_as_string+" do
-      it "+to_s+ is called on +my_int+" do
-        expect(my_int).to receive(:to_s)
-        expect(int_as_string).to eq("3") # referencing +int_as_string+
-      end
-    end
-
-    context "when NOT referencing +int_as_string+" do
-      it "+to_s+ is not called on +my_int+" do
-        expect(my_int).to_not receive(:to_s)
-      end
+    it "is will be a string value" do
+      puts "in the +it+ block"
+      expect(int_as_string).to eq("3")      # first reference
+      expect(int_as_string).to be_a(String) # second reference
     end
   end
 end
@@ -159,19 +152,16 @@ end
 
 ```console
 > rspec main.rb
-..
+in the +it+ block
+in the +let+ block
+.
 
-Finished in 0.00995 seconds (files took 0.30021 seconds to load)
-2 examples, 0 failures
+Finished in 0.0018 seconds (files took 0.28244 seconds to load)
+1 example, 0 failures
 ```
-Here, we have a `let(:int_as_string)` block that calls `to_s` on `my_int`.
-
-In the first example, we are referencing `int_as_string` and therefore, the
-block is executed and `to_s` is called on `my_int`.
-
-In the second example, we are not referencing `int_as_string` and therefore,
-`to_s` is not called on `my_int`.
-Therefore, both the examples in the above test pass.
+You notice that the `puts` line from within the `it` block is first
+printed and only after the first reference of `int_as_string`, the
+line from the `let` block is printed.
 
 #### Cached
 
@@ -180,19 +170,31 @@ and the value is memoized.
 For all the other references, the memoized value is returned without evaluating
 the block.
 
+This is why, in the above example, you see `in the +let+ block` printed only once
+for the first reference and not for the second reference.
+
+Remember, the caching is only done for the example and that the `let` block is 
+evaluated for every example. 
+Let's add another `it` block into the above example:
+
 ```ruby
 RSpec.describe "explaining +let+" do
-  let(:my_int) { double(:my_int, value: 3, to_s: "3") }
+  let(:my_int) { 3 }
 
-  describe "group with +let+" do
-    let(:int_as_string) {  my_int.to_s }
+  describe "as string" do
+    let(:int_as_string) {
+      puts "in the +let+ block"
+      my_int.to_s
+    }
 
-    context "when +int_as_string+ is referenced twice" do
-      it "calls +to_s+ on +my_int+ only once" do
-        expect(my_int).to receive(:to_s).once
-        expect(int_as_string).to eq("3")
-        expect(int_as_string).to eq("3") # referencing +int_as_string+ second time
-      end
+    it "is will be a string value" do
+      puts "in the +it+ block"
+      expect(int_as_string).to eq("3")      # first reference
+      expect(int_as_string).to be_a(String) # second reference
+    end
+    it "is is not empty" do
+      puts "in the new +it+ block"
+      expect(int_as_string).to_not be_empty
     end
   end
 end
@@ -200,14 +202,17 @@ end
 
 ```console
 > rspec main.rb
+in the +it+ block
+in the +let+ block
+.in the new +it+ block
+in the +let+ block
 .
 
-Finished in 0.04564 seconds (files took 0.37002 seconds to load)
-1 example, 0 failures
+Finished in 0.00594 seconds (files took 0.38973 seconds to load)
+2 examples, 0 failures
 ```
 
-The above example passes because the value of `int_as_string` is memoized.
-Otherwise, `.to_s` would have been called twice.
+You see that the `let` block is evaluated twice.
 
 ## `let!`
 
@@ -216,32 +221,19 @@ block is done immediately regardless of whether the helper method defined by it
 is referenced or not.
 
 Modifying the previous example by changing `let(:int_as_string)` to `let!(:int_as_string)`,
-our spec fails with the following error message:
+prints the following:
 
 ```console
-> rspec spec.rb
-F.
+> rspec main.rb
+in the +let+ block
+in the +it+ block
+.
 
-Failures:
-
-  1) explaining +let+ group with +let+ when referencing +int_as_string+ +to_s+ is called on +my_int+
-     Failure/Error: expect(my_int).to receive(:to_s)
-
-       (Double :my_int).to_s(*(any args))
-           expected: 1 time with any arguments
-           received: 0 times with any arguments
-     # ./main.rb:11:in `block (4 levels) in <top (required)>'
-
-Finished in 0.01314 seconds (files took 0.29634 seconds to load)
-2 examples, 1 failure
-
-Failed examples:
-
-rspec ./main.rb:10 # explaining +let+ group with +let+ when referencing +int_as_string+ +to_s+ is called on +my_int+
+Finished in 0.0018 seconds (files took 0.28244 seconds to load)
+1 example, 0 failures
 ```
 
-This shows that our expectation to not receive `to_s` has failed because `let!`
-evaluated the block.
+Notice the `let` block is evaluated before the `it` block.
 
 ## Referencing `let` helper methods in `before`
 
