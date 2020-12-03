@@ -8,13 +8,13 @@ layout: post
 
 Whenever we discuss RSpec, we often use the terms "examples" and "example groups".
 They might be evident for a developer using RSpec but in the beginning of my
-career, it was very evident to me.
+career, it was not very evident to me.
 So, I summarised what I learnt about them in this article.
 
 ## Examples
 
 The `it` blocks in your spec file are referred to examples.
-Imagine these as testing the example behviour of an object.
+Imagine these as testing the example behaviour of an object.
 For example:
 
 ```ruby
@@ -29,7 +29,8 @@ RSpec.describe Account do
 end
 ```
 
-Here, we are testing an example behaviour of the `Account` object.
+Here, we are testing an example behaviour of the `Account` object's
+`full_name` method.
 Therefore, *"combines +first_name+ and +last_name+"* is an ***example***.
 
 ## Example groups
