@@ -173,8 +173,8 @@ the block.
 This is why, in the above example, you see `in the +let+ block` printed only once
 for the first reference and not for the second reference.
 
-Remember, the caching is only done for the example and that the `let` block is 
-evaluated for every example. 
+Remember, the caching is only persisted per example (`it` block). So. the `let` block
+is  evaluated for every example. 
 Let's add another `it` block into the above example:
 
 ```ruby
@@ -268,7 +268,7 @@ end
 
 However, if you are to reference the `let` defined helper methods from
 `before(:all)`, it will not work.
-This is because `before(:all)` executes once for all example while `let`
+This is because `before(:all)` evaluates once for all examples while `let`
 evaluates once for every example.
 
 ## Misc
