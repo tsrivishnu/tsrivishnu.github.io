@@ -28,13 +28,11 @@ show_header: false
 
 ### Projects
 
-#### [ZAGE](https://www.zage.life)
+#### [Zavvy](https://www.zavvy.io)
 
-App to get you the most relevant, up-to-date and expert curated content
-tailored for you.
-One place to find all the content you need for advancing in your career.
+Helping you build engaging experiences for your employees - automated and integrated into the workflow.
 
-`Ruby on rails` `Elasticsearch` `Kafka` `Docker`
+`Ruby on rails` `Elasticsearch` `Kafka` `Docker` `Webpack` `VueJS`
 
 
 #### [alexa-rails](https://github.com/tsrivishnu/alexa-rails)
