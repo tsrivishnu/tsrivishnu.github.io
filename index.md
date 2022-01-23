@@ -30,7 +30,8 @@ show_header: false
 
 #### [Zavvy](https://www.zavvy.io)
 
-Helping you build engaging experiences for your employees - automated and integrated into the workflow.
+Zavvy is the easiest way to foster performance, culture and well-being.
+No matter if your team is remote, hybrid, or in-office.
 
 `Ruby on rails` `Elasticsearch` `Kafka` `Docker` `Webpack` `VueJS`
 
