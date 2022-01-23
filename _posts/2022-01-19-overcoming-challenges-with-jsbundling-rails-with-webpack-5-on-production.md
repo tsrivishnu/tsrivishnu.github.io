@@ -7,12 +7,13 @@ layout: post
 ---
 
 At [Zavvy](https://www.zavvy.io), we have been wanting to migrate to Webpack 5
-while we were running Rails version
-6.1 with [Webpacker](https://github.com/rails/webpacker).
-We also have our development environment setup with Docker and running Webpacker
+for a long time now.
+Our app was running on Rails 6.1 with
+[Webpacker](https://github.com/rails/webpacker).
+Our development environment is setup with Docker and running Webpacker
 in Docker with webpack-dev-server has been very suboptimal and slow.
-Also, Webpack is very slow and we wanted to migrate away from it and move to
-other bundlers like Esbuild.
+Webpack itself, is also very slow and we wanted to migrate away from it and
+move to other bundlers like Esbuild.
 
 Rails team has
 [announced](https://world.hey.com/dhh/rails-7-will-have-three-great-answers-to-javascript-in-2021-8d68191b)
