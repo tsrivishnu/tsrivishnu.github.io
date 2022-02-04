@@ -17,7 +17,7 @@ lists that helps in cases like this.
 
 The following is what I do to load the Rubocop results into VIM:
 
-```console
+```bash
 $ bundle exec rubocop . -o rubocop-offenses-list
 $ vim -q rubocop-offenses-list
 ```
