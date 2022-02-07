@@ -64,9 +64,9 @@ public/assets/app-5698cfb0cae1ccdeeba796484254062f529d8b5fc574c77bbb98ff9b6c3104
 This works fine for the basic cases.
 However, no Webpack build configuration is simple and neither is ours.
 
-## Chunks, Sourcemaps and Asset pipeline (Sprcokets)
+## Chunks, Sourcemaps and Asset pipeline (Sprockets)
 
-First issue we faced is with chunks configuration.
+First issue we faced was with chunks configuration.
 Webpack generates chunks with incremental file names like `app-chunk-0.js`,
 `app-chunk-1.js` etc., and there is no way for us to know how many chunks
 are created and how they are named.
