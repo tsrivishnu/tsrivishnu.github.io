@@ -10,9 +10,9 @@ At [Zavvy](https://www.zavvy.io), we have been wanting to migrate to Webpack 5
 for a long time now.
 Our app was running on Rails 6.1 with
 [Webpacker](https://github.com/rails/webpacker).
-Our development environment is setup with Docker and running Webpacker
-in Docker with webpack-dev-server has been very suboptimal and slow.
-Webpack itself, is also very slow and we wanted to migrate away from it and
+Our development environment is setup with Docker and performance when running
+Webpacker in Docker with webpack-dev-server has been very suboptimal and slow.
+Webpack itself is also very slow and we wanted to migrate away from it and
 move to other bundlers like Esbuild.
 
 Rails team has
@@ -35,8 +35,8 @@ migration.
 Webpack entrypoint files are under `app/javascript/entrypoints` directory.
 Webpack bundles these files and other chunks or asset files
 (JS, CSS, images etc.) and places them in `app/assets/builds/` directory.
-Rails' Asset pipeline picks them from this directory and compiles them when
-`rake assets:precompile` is run.
+Rails' Asset pipeline (Sprockets) picks them from this directory and compiles 
+them when `rake assets:precompile` is run.
 
 Generally, the entrypoints bundled by Webpack are bundled without any
 digest appended in the filename.
@@ -144,7 +144,7 @@ are not picked up by the precompilation process.
 If we run `rake assets:precompile` second time, it seems to work fine.
 
 After 5 hours of debugging, we realised that the `app/assets/builds` directory
-is gitingored and is being cleared by Webpack for every build.
+is gitignored and is being cleared by Webpack for every build.
 
 The fix was to add a `.keep` file to `app/assets/builds` and configure Webpack
 to not clear this directory completely so that the directory exists before
@@ -190,7 +190,7 @@ Example:
 //# sourceMappingURL=app-5698cfb0cae1ccdeebd.js.map;
 ```
 
-Turns out, there is no immediate solution available for this.
+There seems to be no immediate solution to this.
 See [the issue on jsbundling-rails repo](https://github.com/rails/jsbundling-rails/issues/24).
 
 #### Configure nginx to remove the semicolon
@@ -231,8 +231,9 @@ We first tried using [Webpack cache](https://webpack.js.org/configuration/cache/
 to improve the build time.
 We setup a `filesystem` cache and made sure all the directories are added to the
 `linked_dirs` in Capistrano configuration.
-Webpack still would use cache during deployments for some reason.
-Instead of trying figure out the solution to that, we took a different approach.
+Webpack still wouldn't use cache during deployments for some reason.
+Instead of trying to figure out the solution to that, we took a different 
+approach.
 
 We decided to use `git diff` to see if any of the files are changed compared to
 the previously deployed version and run `assets:precompile` only if there are
@@ -243,7 +244,7 @@ about the same.
 It defines a new Capistrano task that will look for the file changes and removes
 the tasks from the `assets:precompile` deploy stage.
 We adapted it to our setup by adding all the files and directories that are to
-be checked for changed.
+be checked for changes.
 This is what we added to our `config/deploy.rb`:
 
 ```ruby
@@ -286,7 +287,7 @@ end
 ```
 
 Now, assets are precompiled only when there are changes to the files that affect
-them and we saved a few minutes in our deployment.
+them and we saved a few minutes in our deployments.
 
 The downside to this approach is that we have to keep
 `locations_affecting_assets` updated according to the changes to our Javascript
@@ -301,23 +302,23 @@ Unfortunately, with this setup, we can not use HMR in development.
 This is because Rails is now made unaware of the Javascript bundler and there
 are no helpers built for this purpose.
 
-We accepted not having HMR for now and if this becomes an absolute necessasity,
+We accepted not having HMR for now and if this becomes an absolute necessity,
 we think we understand the internals of how HMR works and we will be able to
 build a solution ourselves by extending Rails' helpers.
 There might also be new open-source libraries that enable that functionality
-in the future as more Rails app take this approach with `jsbundling-rails`.
+in the future as more Rails apps take this approach with `jsbundling-rails`.
 
 
 ## Summary
 
 This has been our journey with upgrading to jsbundling-rails and Webpack 5.
 We are loooking forward to using this setup because it eliminates a lot of
-inconsistencies that our front-end developers face while developing with
+inconsistencies that our front-end developers faced while developing with
 Webpacker and having to regularly restart Docker engine because Rails server
 from Docker container won't communicate correctly with the Webpack dev server.
 
-This setup also enables us to later move away from Webpack 5 independently from
-Rails to faster alternatives.
+This setup also enables us to later move away from Webpack 5 to other faster
+alternatives without worrying about Rails supporting them natively. 
 
 We hope this article helps others to easily plan a migration to
 `jsbundling-rails`.
