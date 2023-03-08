@@ -1,0 +1,118 @@
+<section data-auto-animate>
+  <p>Classes and modules</p>
+</section>
+<section data-auto-animate>
+  <p><del>Classes and modules</del></p>
+  <p>Classes</p>
+</section>
+<section data-auto-animate>
+  <p><del>Classes and modules</del></p>
+  <p><del>Classes</del></p>
+  <p>Objects<p>
+</section>
+
+<section data-auto-animate>
+  <p>Everything is just a plain Ruby object.</p>
+</section>
+<section data-auto-animate>
+  <p>Everything is just a plain Ruby object.</p>
+  <p>for example, No special Service objects, or commands etc.</p>
+</section>
+
+<section data-auto-animate>
+  <p>
+  All actions are just (very specific) Domain objects
+  </p>
+  <p>...and they <u>know</u> to do only 1 thing!</p>
+</section>
+<section data-auto-animate>
+  <p>
+  All actions are just (very specific) Domain objects
+  </p>
+  <p>...and they <u>know</u> to do only 1 thing!</p>
+  <p>...and <u>only they can</u> do it!</p>
+</section>
+
+<section>
+  Examples objects
+  <pre>
+  <code class="ruby" data-trim data-noescape>
+  # create/update or delete sessions for an Event
+  Events::SessionsListUpdation.new(event).update_all_later!
+
+  # Sync session changes to user's calendar
+  Nylas::Sessions::UpstreamUpdation.new(session)
+    .update_later_with_debounce!
+
+  # Add participants to sessions
+  Events::EventParticipationsSessionUpdation.new(event)
+    .update_all_later_with_debounce!
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>Notice the class names</p>
+  <pre>
+  <code class="ruby" data-trim data-noescape>
+  # create/update or delete sessions for an Event
+  Events::SessionsListUpdation
+
+  # Sync session changes to user's calendar
+  Nylas::Sessions::UpstreamUpdation
+
+  # Add participants to sessions
+  Events::EventParticipationsSessionUpdation
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>Notice the class names</p>
+  <pre>
+  <code class="ruby" data-trim data-noescape>
+  # create/update or delete sessions for an Event
+  Events::SessionsListUpdation
+
+  # Sync session changes to user's calendar
+  Nylas::Sessions::UpstreamUpdation
+
+  # Add participants to sessions
+  Events::EventParticipationsSessionUpdation
+  </code>
+  </pre>
+  <p>
+  they can do only 1 thing.
+  </p>
+</section>
+
+<section>
+  <p>Everything is an object.</p>
+  <pre>
+  <code class="ruby" data-trim data-noescape>
+  # Presenters
+  class EventsPresenter
+    ...
+  end
+
+  # Policies
+  class CompanyUserPolicy
+    ...
+  end
+
+  # an Action
+  class CompanyDeletion
+    ...
+  end
+  </code>
+  </pre>
+</section>
+
+<section>
+  <p>Summary</p>
+  <ul>
+    <li>Simplicity</li>
+    <li>No dependencies</li>
+    <li>Maintain a simple public API for objects (limit to 1 or 2 public methods)</li>
+    <li>What you see what you get -- no jumping between super classes or modules</li>
+  </ul>
+</section>

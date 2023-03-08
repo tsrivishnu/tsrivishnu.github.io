@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Work from Anywhere - Ruby meetup, 10 April, 2019</title>
+
+		<link rel="stylesheet" href="wip-meetup/reveal.js-4.4.0/dist/reset.css">
+		<link rel="stylesheet" href="wip-meetup/reveal.js-4.4.0/dist/reveal.css">
+		<link rel="stylesheet" href="wip-meetup/reveal.js-4.4.0/dist/theme/solarized.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="wip-meetup/reveal.js-4.4.0/plugin/highlight/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<!-- <script> -->
+		<!-- 	var link = document.createElement( 'link' ); -->
+		<!-- 	link.rel = 'stylesheet'; -->
+		<!-- 	link.type = 'text/css'; -->
+		<!-- 	link.href = window.location.search.match( /print-pdf/gi ) ? 'wip-meetup/reveal.js-4.4.0/css/print/pdf.css' : 'wip-meetup/reveal.js-4.4.0/css/print/paper.css'; -->
+		<!-- 	document.getElementsByTagName( 'head' )[0].appendChild( link ); -->
+		<!-- </script> -->
+	</head>
+
+  <style>
+    tab-size: 4;
+  </style>
+
+
+	<body>
+		<div class="reveal">
+      <div class="slides">
+
+        <section>
+            Patterns for building maintainable Rails app
+            </br>
+            <small>
+              <i>Guidelines and practices we put in place to build our Rails app with maintainability in mind.</i>
+            </small>
+            </br>
+            <p>
+              <a href="https://github.com/tsrivishnu">tsrivishnu</a>
+              </br>
+              <a href="https://github.com/tsrivishnu">
+                <img src="assets/images/github.png" style="width: 30px;border:none;box-shadow:none;"/>
+              </a>
+            </p>
+        </section>
+
+        <section data-markdown data-separator-notes="^Note:">
+          <textarea data-template>
+            * ActiveJobs
+            * Naming associations
+            * Controllers
+              * authorization with policy
+              * Strictly CRUD
+            * Rubocop to enforce styles
+            * Presenters
+              * Jbuilder
+              * Querying with caching
+            * Ruby objects
+              * POROs
+              * No service objects
+              * Naming guidelines
+                * Classes
+                * Modules
+            * Disconnected front-end
+            * Summary
+              * Don't deviate from the Rails way
+              * Rubocop with custom rules
+              * Move responsibilities to the callers.
+                * Exception handling in classes
+                * Querying in presenters or anywhere else
+                * Make callers explicitly ask for what they want
+                  * Optoins in presenters
+          </textarea>
+        </section>
+
+        <section>
+          <p>
+          Our goals are simple:
+          </p>
+          <ul>
+            <li>Easy to read</li>
+            <li>Reduce the amount gems</li>
+            <li>Stick to Rails-way always</li>
+            <li>Consistency</li>
+          </ul>
+        </section>
+
+        <section data-external="wip-meetup/objects.html"></section>
+        <section data-external="wip-meetup/declarative.html"></section>
+        <section data-external="wip-meetup/active-jobs.html"></section>
+        <section data-external="wip-meetup/presenters.html"></section>
+        <!-- <section data-external="wip-meetup/controllers.html"></section> -->
+        <!-- <section data-external="wip-meetup/naming.html"></section> -->
+        <!-- <section data-external="wip-meetup/front-end.html"></section> -->
+
+        <section data-markdown>
+          <textarea data-template>
+            * Stick to terminal.
+            * Access to the machine.
+            * Tips and Tricks.
+          </textarea>
+        </section>
+
+        <section data-external="work-from-anywhere/stick-to-terminal.html"></section>
+        <section data-external="work-from-anywhere/access-to-machine.html"></section>
+
+        <section>
+            Thank you!
+            </br>
+            </br>
+            <p>
+              <a href="https://github.com/tsrivishnu">tsrivishnu</a>
+              </br>
+              <a href="https://twitter.com/tsrivishnu">
+                <img src="assets/images/twitter.png" style="width: 30px;border:none;box-shadow:none;"/>
+              </a>
+              <a href="https://github.com/tsrivishnu">
+                <img src="assets/images/github.png" style="width: 30px;border:none;box-shadow:none;"/>
+              </a>
+            </p>
+        </section>
+      </div>
+		</div>
+
+		<!-- <script src="wip-meetup/reveal.js-4.4.0/lib/js/head.min.js"></script> -->
+		<!-- <script src="wip-meetup/reveal.js-4.4.0/js/reveal.js"></script> -->
+
+		<script src="wip-meetup/reveal.js-4.4.0/dist/reveal.js"></script>
+		<script src="wip-meetup/reveal.js-4.4.0/plugin/zoom/zoom.js"></script>
+		<script src="wip-meetup/reveal.js-4.4.0/plugin/notes/notes.js"></script>
+		<script src="wip-meetup/reveal.js-4.4.0/plugin/search/search.js"></script>
+		<script src="wip-meetup/reveal.js-4.4.0/plugin/markdown/markdown.js"></script>
+		<script src="wip-meetup/reveal.js-4.4.0/plugin/highlight/highlight.js"></script>
+		<script src="wip-meetup/reveal.js-plugins/external/external.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ],
+				dependencies: [
+          { src: 'wip-meetup/reveal.js-plugins/external/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } },
+				]
+			});
+		</script>
+	</body>
+</html>
