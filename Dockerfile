@@ -1,6 +1,12 @@
-FROM ruby:2.5.6-stretch
-# Install program to configure locales
-RUN apt-get update && apt-get install -y locales
+FROM ruby:3.2.1-slim-buster
+
+RUN apt-get update -qq;\
+    apt-get install -y build-essential \
+                       git \
+                       locales; \
+    rm -rf /var/lib/apt/lists/*;
+
+# configure locales
 RUN dpkg-reconfigure locales && \
   locale-gen C.UTF-8 && \
   /usr/sbin/update-locale LANG=C.UTF-8

@@ -3,7 +3,7 @@ services:
   site:
     build: .
     ports:
-      - "5000:4000"
+      - "9000:4000"
     hostname: "site"
     environment:
       - "BUNDLE_PATH=/app/.bundle"
