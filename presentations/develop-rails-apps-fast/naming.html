@@ -1,0 +1,96 @@
+<section>
+  Naming conventions
+</section>
+
+<section data-auto-animate>
+  <p>
+  Suffix returned object type
+  </p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers>
+  event.cohost
+  # => CompanyUser #123....
+
+  journey.last_edited_by
+  # => CompanyUser #123....
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>
+  Suffix returned object type
+  </p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="1,4">
+  event.cohost_company_user
+  # => CompanyUser #123....
+
+  journey.last_edited_by_company_user
+  # => CompanyUser #123....
+  </code>
+  </pre>
+</section>
+
+<section>
+  Modules are Plural
+  </br>
+  Classes are Singular
+</section>
+
+<section>
+  <pre>
+  <code class="ruby" data-trim data-line-numbers="1,5">
+  Companies::CompanyUsersList
+    .new(companys)
+    .all
+
+  Events::SessionsList
+    .new(events)
+    .all
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Don't be shy of long names
+  </p>
+  <pre data-id="code">
+  <code class="ruby">
+  # IDs of +FeedbackCycleFeedbackTypes+
+  #     which are +blocked+
+  #     for the +reviewee+
+  feedback_cycle_feedback_types_ids_with_blocked_access_for_reviewee
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>
+  Don't be shy of long names
+  </p>
+  <pre data-id="code">
+  <code class="ruby">
+  # IDs of +FeedbackCycleFeedbackTypes+
+  #     which are +blocked+
+  #     for the +reviewee+
+  feedback_cycle_feedback_types_ids_with_blocked_access_for_reviewee
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Predicate in the variable name
+  </p>
+  <pre>
+  <code class="ruby" data-trim data-line-numbers>
+  # simple variables
+  has_admin_rights = @company_user.admin?
+
+  # conditioning arguments
+  Slack::ChannelsList.fetch_all!(
+    should_include_private_channels: true
+  )
+  </code>
+  </pre>
+</section>

@@ -25,7 +25,7 @@
     class SessionsManagement
       def perform!
         create_sessions!
-        create_session_in_user_calendar!
+        create_sessions_in_user_calendar!
         invite_participants!
       end
 
@@ -45,9 +45,9 @@
   <p>Concurrency?</p>
 </section>
 
-<section>
+<section data-auto-animate>
   <p>Sessions management for an Event (delcarative)</p>
-  <pre>
+  <pre data-id="code">
     <code class="ruby" data-trim>
     class SessionsManagement
       def perform_now!
@@ -67,9 +67,9 @@
   </pre>
 </section>
 
-<section>
+<section data-auto-animate>
   <p>Concurrency</p>
-  <pre>
+  <pre data-id="code">
     <code class="ruby" data-trim data-line-numbers="6,9,4-7">
     class SessionsManagement
       def perform_now!

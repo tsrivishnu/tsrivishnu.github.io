@@ -1,12 +1,13 @@
 <section>
-  ActiveJobs
+  <p>Background jobs</p>
+  <p><small>ActiveJobs</small></p>
 </section>
 
-<section>
+<section data-auto-animate>
   <p>A typical example</p>
 
-  <pre>
-  <code class="ruby" data-trim>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers>
   class GuestsCleanupJob < ApplicationJob
     queue_as :default
 
@@ -20,6 +21,73 @@
 
   # Enqueue a job to be performed 1 week from now.
   GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>A typical example</p>
+
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="4-6">
+  class GuestsCleanupJob < ApplicationJob
+    queue_as :default
+
+    def perform(*guests)
+      # Do something later
+    end
+  end
+
+  # Enqueue a job to be performed
+  GuestsCleanupJob.perform_later guest
+
+  # Enqueue a job to be performed 1 week from now.
+  GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>A typical example</p>
+
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="9-13">
+  class GuestsCleanupJob < ApplicationJob
+    queue_as :default
+
+    def perform(*guests)
+      # Do something later
+    end
+  end
+
+  # Enqueue a job to be performed
+  GuestsCleanupJob.perform_later guest
+
+  # Enqueue a job to be performed 1 week from now.
+  GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>A typical example</p>
+
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="15-16">
+  class GuestsCleanupJob < ApplicationJob
+    queue_as :default
+
+    def perform(*guests)
+      # Do something later
+    end
+  end
+
+  # Enqueue a job to be performed
+  GuestsCleanupJob.perform_later guest
+
+  # Enqueue a job to be performed 1 week from now.
+  GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+
+  # Run job immediately
+  GuestsCleanupJob.new(guest).perform_now
+
   </code>
   </pre>
 </section>

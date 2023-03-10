@@ -47,7 +47,7 @@ Presenters
 </section>
 
 <section data-auto-animate>
-  <p>querying and filtering are callers responsibility</p>
+  <p>querying and filtering are callers' responsibility</p>
 </section>
 
 <section data-auto-animate>
@@ -111,7 +111,7 @@ Presenters
     end
 
     def next_sessions_as_json_by_event_id
-      @_next_sessions_as_json_by_event_id ||= SessionPresenter.new(
+      @_next_sessions_as_json_by_event_id ||= SessionsPresenter.new(
         NextSessionsList.new(@events).all
       ).as_json.group { |h| h["event_id"] }
     end
@@ -147,5 +147,12 @@ Presenters
     <li>Take objects to present</li>
     <li>Accept options (default <code>false</code>)</li>
     <li>Avoid n+1s</li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>reusable</li>
+    <li>responsible for single object types</li>
   </ul>
 </section>
