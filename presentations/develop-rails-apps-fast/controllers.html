@@ -1,0 +1,151 @@
+<section>
+  Controllers
+</section>
+
+<section>
+  <ul>
+    <li data-id="crud">CRUD</li>
+    <li>Authentication</li>
+    <li>Authorization</li>
+  </ul>
+</section>
+
+<section data-auto-animate>
+  only CRUD, so Resources
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="1">
+    class JourneySearchesController < Api::BaseController
+      def create
+        ...
+      end
+    end
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p data-id="crud">Typical controller</p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="2,4,10">
+    class JourneySearchesController < Api::BaseController
+      include StrictlyProtectedActions
+
+      def create
+        ...
+      end
+
+      private
+
+      def allow_create?
+        ...
+      end
+    end
+  </code>
+  </pre>
+</section>
+
+<section>
+  Policies
+</section>
+
+<section>
+  <p>Policies</p>
+  <pre>
+  <code class="ruby" data-trim>
+    class CompanyJourneysPolicy
+      def initialize(user, company)
+        ...
+      end
+
+      def list?
+        company_admin?
+      end
+
+      def create?
+        company_admin?
+      end
+
+      # show?, delete?, edit?
+
+      private
+
+      ...
+    end
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p data-id="crud">Typical controller</p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="2,4,10">
+    class JourneySearchesController < Api::BaseController
+      include StrictlyProtectedActions
+
+      def create
+        ...
+      end
+
+      private
+
+      def allow_create?
+        ...
+      end
+    end
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p data-id="crud">Typical controller with policy</p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="11-13">
+    class JourneySearchesController < Api::BaseController
+      include StrictlyProtectedActions
+
+      def create
+        ...
+      end
+
+      private
+
+      def allow_create?
+        CompanyJourneysPolicy
+          .new(context_user, context_company)
+          .list?
+      end
+    end
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p data-id="crud">Typical controller with policy</p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="11-13">
+    class JourneySearchesController < Api::BaseController
+      include StrictlyProtectedActions
+
+      def create
+        ...
+      end
+
+      private
+
+      def allow_create?
+        CompanyJourneySearchesPolicy
+          .new(context_user, context_company)
+          .create?
+      end
+    end
+  </code>
+  </pre>
+</section>
+
+<section>
+  Flexible and simple
+</section>
+
+<section>
+  Why not Pandit?
+</section>

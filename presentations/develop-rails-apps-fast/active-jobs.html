@@ -1,0 +1,300 @@
+<section>
+  <p>Background jobs</p>
+  <p><small>ActiveJobs</small></p>
+</section>
+
+<section data-auto-animate>
+  <p>A typical example</p>
+
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers>
+  class GuestsCleanupJob < ApplicationJob
+    queue_as :default
+
+    def perform(*guests)
+      # Do something later
+    end
+  end
+
+  # Enqueue a job to be performed
+  GuestsCleanupJob.perform_later guest
+
+  # Enqueue a job to be performed 1 week from now.
+  GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>A typical example</p>
+
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="4-6">
+  class GuestsCleanupJob < ApplicationJob
+    queue_as :default
+
+    def perform(*guests)
+      # Do something later
+    end
+  end
+
+  # Enqueue a job to be performed
+  GuestsCleanupJob.perform_later guest
+
+  # Enqueue a job to be performed 1 week from now.
+  GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>A typical example</p>
+
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="9-13">
+  class GuestsCleanupJob < ApplicationJob
+    queue_as :default
+
+    def perform(*guests)
+      # Do something later
+    end
+  end
+
+  # Enqueue a job to be performed
+  GuestsCleanupJob.perform_later guest
+
+  # Enqueue a job to be performed 1 week from now.
+  GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+  </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <p>A typical example</p>
+
+  <pre data-id="code">
+  <code class="ruby" data-trim data-line-numbers="15-16">
+  class GuestsCleanupJob < ApplicationJob
+    queue_as :default
+
+    def perform(*guests)
+      # Do something later
+    end
+  end
+
+  # Enqueue a job to be performed
+  GuestsCleanupJob.perform_later guest
+
+  # Enqueue a job to be performed 1 week from now.
+  GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+
+  # Run job immediately
+  GuestsCleanupJob.new(guest).perform_now
+
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Keep em simple
+  </p>
+  <aside class="notes">
+    The job of jobs is only to simply runs some logic in background.
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Keep em simple
+  </p>
+  <pre>
+    <code class="ruby" data-trim data-line-numbers="4-7">
+      module Events
+        class DeletionsJob < ApplicationJob
+          def perform(event_id)
+            event = Event.find_by(id: event_id)
+            return if event.nil?
+
+            Events::Deletion.new(event).delete_now!
+          end
+        end
+      end
+    </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Keep em simple
+  </p>
+  <pre>
+    <code class="ruby" data-trim data-line-numbers="4-7">
+      module Events
+        class DeletionsJob < ApplicationJob
+          def perform(event_id)
+            event = Event.find_by(id: event_id)
+            return if event.nil?
+
+            Events::Deletion.new(event).delete_now!
+          end
+        end
+      end
+    </code>
+  </pre>
+  <pre data-id="usage-code">
+    <code class="ruby" data-trim data-line-numbers>
+    # Delete now
+    Events::Deletion.new(event).delete_now!
+
+    # Delete in background
+    Events::DeletionsJob.perform_later(event_id)
+    </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Keep em simple
+  </p>
+  <pre>
+    <code class="ruby" data-trim data-line-numbers="4-7">
+      module Events
+        class DeletionsJob < ApplicationJob
+          def perform(event_id)
+            event = Event.find_by(id: event_id)
+            return if event.nil?
+
+            Events::Deletion.new(event).delete_now!
+          end
+        end
+      end
+    </code>
+  </pre>
+  <pre data-id="usage-code">
+    <code class="ruby" data-trim data-line-numbers>
+    # Delete now
+    Events::Deletion.new(event).delete_now!
+
+    # Delete in background
+    # Events::DeletionsJob.perform_later(event_id)
+    Events::Deletion.new(event).delete_later!
+    </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Keep em simple
+  </p>
+  <pre>
+    <code class="ruby" data-trim data-line-numbers="4-7">
+    class Events::Deletion
+      ...
+
+      def delete_later!
+        Events::DeletionsJob.perform_later(@event.id)
+      end
+
+      def delete_now!
+        ...
+      end
+    end
+    </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>
+  Debouncing
+  </p>
+  <pre>
+    <code class="ruby" data-trim data-line-numbers="7-13">
+    10.times do
+      Events::Deletion.new(1).delete_later!
+    end
+    </code>
+  </pre>
+</section>
+
+<section>
+  <p>Why is deboucing important?</p>
+</section>
+
+<section data-auto-animate>
+  <p>Remember our declarative example?</p>
+  <pre data-id="code">
+    <code class="ruby" data-trim>
+      Events::SessionsListUpdation.new(e).update_all_now!
+
+      Sessions::UpstreamUpdation.new(e.sessions).update_now!
+
+      Events::ParticipationsUpdation.new(e).update_now!
+    </code>
+  </pre>
+</section>
+<section data-auto-animate>
+  <pre data-id="code">
+    <code class="ruby" data-trim>
+      Sessions::UpstreamUpdation.new(e.sessions).update_now!
+    </code>
+  </pre>
+  <p>can be called multiple time in a second from:</p>
+  <ul>
+    <li><code>Session</code> model callsbacks</li>
+    <li>Event's Session management class</li>
+  </ul>
+</section>
+
+<section data-auto-animate>
+  <pre data-id="code">
+    <code class="ruby" data-trim>
+    class Sessions::UpstreamUpdation
+
+      def update_later_with_debounce!
+        return if update_scheduled?
+
+        update_scheduled!
+        Sessions::UpstreamUpdationsJob
+          .set(wait: 5.seconds)
+          .perform_later(@session.id)
+      end
+
+      def update_now!
+        update_started!
+        ...
+      end
+    end
+    </code>
+  </pre>
+</section>
+
+<section>
+  <p>Skeleton</p>
+  <pre>
+    <code class="ruby" data-trim>
+      class Events::DeletionsJob < ApplicationJob
+        def perform(event_id)
+          ... # find event or return
+          Events::Deletion.new(event).delete_now!
+        end
+      end
+
+      class Events::Deletion
+        def update_later! # or, ..._later_with_debouce!
+          ...
+        end
+
+        def udpate_now!
+          ...
+        end
+      end
+    </code>
+  </pre>
+</section>
+
+<section>
+  <ul>
+    <li>Agnostic to adapter (Sidekiq, Resque etc.)</li>
+    <li>Classes contain all business logic</li>
+    <li>Easy testing and management</li>
+    <li>Flexibility to run <code>..._now!</code> methods from anywhere.</li>
+  </ul>
+</section>

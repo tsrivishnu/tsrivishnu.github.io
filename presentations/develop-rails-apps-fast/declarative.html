@@ -1,0 +1,106 @@
+<section>
+  <p>Declarative</p>
+</section>
+
+<section>
+  <p>Sessions management for an Event (imperative)</p>
+  <p>
+  <ol>
+    <li>create Sessions for Event</li>
+    <li>
+      create in calendar
+      <ol>
+        <li>If Google, ...</li>
+        <li>or, if Microsoft, ...</li>
+      </ol>
+    </li>
+    <li>invite participants</li>
+  </ol>
+  </p>
+</section>
+<section>
+  <p>Sessions management for an Event (imperative)</p>
+  <pre>
+    <code class="ruby" data-trim>
+    class SessionsManagement
+      def perform!
+        create_sessions!
+        create_sessions_in_user_calendar!
+        invite_participants!
+      end
+
+      private
+
+      ...
+    end
+    </code>
+  </pre>
+</section>
+
+<section>
+  <p>All logic in one class?</p>
+</section>
+
+<section>
+  <p>Concurrency?</p>
+</section>
+
+<section data-auto-animate>
+  <p>Sessions management for an Event (delcarative)</p>
+  <pre data-id="code">
+    <code class="ruby" data-trim>
+    class SessionsManagement
+      def perform_now!
+        # create_sessions!
+        Events::SessionsListUpdation.new(e).update_all_now!
+
+        # create_session_in_user_calendar!
+        Sessions::UpstreamUpdation.new(e.sessions)
+          .update_now!
+
+        # invite_participants!
+        Events::ParticipationsUpdation.new(e)
+          .update_now!
+      end
+    end
+    </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>Concurrency</p>
+  <pre data-id="code">
+    <code class="ruby" data-trim data-line-numbers="6,9,4-7">
+    class SessionsManagement
+      def perform_now!
+        Events::SessionsListUpdation.new(e).update_all_now!
+        e.sessions.each do
+          Sessions::UpstreamUpdation.new(e.sessions)
+            .update_later!
+        end
+        Events::ParticipationsUpdation.new(e)
+          .update_later!
+      end
+    end
+    </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <ul>
+    <li>Encourages to think in domain objects</li>
+  </ul>
+</section>
+<section data-auto-animate>
+  <ul>
+    <li>Encourages to think in domain objects</li>
+    <li>greater flexibility</li>
+  </ul>
+</section>
+<section data-auto-animate>
+  <ul>
+    <li>Encourages to think in domain objects</li>
+    <li>greater flexibility</li>
+    <li>avoids classes with many responsibilities</li>
+  </ul>
+</section>
