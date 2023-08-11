@@ -47,10 +47,6 @@ Presenters
 </section>
 
 <section data-auto-animate>
-  <p>querying and filtering are callers' responsibility</p>
-</section>
-
-<section data-auto-animate>
   <p data-id="resp">Accept options</p>
   <pre data-id="code">
   <code class="ruby" data-trim data-line-numbers="4-7">
@@ -123,6 +119,31 @@ Presenters
   <p data-id="resp">Example usage</p>
   <pre>
   <code class="ruby" data-trim data-line-numbers="8-11">
+  class EventsController < ApplicationController
+    def index
+      events = Company::EventsList.new(
+        company,
+        filters: filters
+      ).all
+
+      render json: EventsPresenter.new(
+        events,
+        include_options: { next_session: true }
+      ).as_json
+    end
+  end
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p>querying and filtering are callers' responsibility</p>
+</section>
+
+<section data-auto-animate>
+  <p data-id="resp">Example usage</p>
+  <pre>
+  <code class="ruby" data-trim data-line-numbers="3-6">
   class EventsController < ApplicationController
     def index
       events = Company::EventsList.new(

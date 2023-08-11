@@ -31,26 +31,6 @@
   </pre>
 </section>
 
-<section>
-  Modules are Plural
-  </br>
-  Classes are Singular
-</section>
-
-<section>
-  <pre>
-  <code class="ruby" data-trim data-line-numbers="1,5">
-  Companies::CompanyUsersList
-    .new(companys)
-    .all
-
-  Events::SessionsList
-    .new(events)
-    .all
-  </code>
-  </pre>
-</section>
-
 <section data-auto-animate>
   <p>
   Don't be shy of long names
@@ -91,6 +71,42 @@
   Slack::ChannelsList.fetch_all!(
     should_include_private_channels: true
   )
+  </code>
+  </pre>
+</section>
+
+<section>
+  Modules are Plural
+  </br>
+  Classes are Singular
+</section>
+
+<section>
+  <pre>
+  <code class="ruby" data-trim data-line-numbers="1,5">
+  Companies::CompanyUsersList
+    .new(companys)
+    .all
+
+  Events::SessionsList
+    .new(events)
+    .all
+  </code>
+  </pre>
+</section>
+
+
+<section>
+  <p>Examples:</p>
+  <pre>
+  <code class="ruby" data-trim>
+  Events::SessionsListUpdation
+
+  Companies::CompanyUserDeletion
+
+  SlackIntegrations::Cohorts::ChannelCreation
+
+  SlackIntegrations::Cohorts::ChannelNameGeneration
   </code>
   </pre>
 </section>

@@ -214,51 +214,22 @@
   </pre>
 </section>
 
-<section>
-  <p>Why is deboucing important?</p>
-</section>
-
-<section data-auto-animate>
-  <p>Remember our declarative example?</p>
-  <pre data-id="code">
-    <code class="ruby" data-trim>
-      Events::SessionsListUpdation.new(e).update_all_now!
-
-      Sessions::UpstreamUpdation.new(e.sessions).update_now!
-
-      Events::ParticipationsUpdation.new(e).update_now!
-    </code>
-  </pre>
-</section>
 <section data-auto-animate>
   <pre data-id="code">
     <code class="ruby" data-trim>
-      Sessions::UpstreamUpdation.new(e.sessions).update_now!
-    </code>
-  </pre>
-  <p>can be called multiple time in a second from:</p>
-  <ul>
-    <li><code>Session</code> model callsbacks</li>
-    <li>Event's Session management class</li>
-  </ul>
-</section>
+    class Events::Deletion
 
-<section data-auto-animate>
-  <pre data-id="code">
-    <code class="ruby" data-trim>
-    class Sessions::UpstreamUpdation
+      def delete_later_with_debounce!
+        return if delete_scheduled?
 
-      def update_later_with_debounce!
-        return if update_scheduled?
-
-        update_scheduled!
-        Sessions::UpstreamUpdationsJob
+        delete_scheduled!
+        Events::DeletionsJob
           .set(wait: 5.seconds)
           .perform_later(@session.id)
       end
 
-      def update_now!
-        update_started!
+      def delete_now!
+        delete_started!
         ...
       end
     end
@@ -278,7 +249,7 @@
       end
 
       class Events::Deletion
-        def update_later! # or, ..._later_with_debouce!
+        def delete_later! # or, ..._later_with_debouce!
           ...
         end
 
@@ -291,6 +262,11 @@
 </section>
 
 <section>
+  <p><code>gem sidekiq-unique-jobs</code>?</p>
+</section>
+
+<section>
+  <p>Summary</p>
   <ul>
     <li>Agnostic to adapter (Sidekiq, Resque etc.)</li>
     <li>Classes contain all business logic</li>

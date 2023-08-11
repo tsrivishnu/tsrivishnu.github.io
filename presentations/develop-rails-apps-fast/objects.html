@@ -40,6 +40,61 @@
 </section>
 
 <section data-auto-animate>
+  <p data-id="title">A big car object</p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-noescape>
+  class Car
+    def open_doors
+      # ...
+    end
+
+    def start_engine
+      # ...
+    end
+  end
+
+  Car.new.open_doors
+  Car.new.start_engine
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p data-id="title">Car with domain object</p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-noescape>
+  class Cars::OpenDoorsAction
+    def open_now!
+      # ...
+    end
+  end
+
+  class Cars::StartEngineAction
+    def start_now!
+      # ...
+    end
+  end
+
+  Cars::OpenDoorsAction.new(car).open_now!
+  Cars::StartEngineAction.new(car).start_now!
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
+  <p data-id="title">Car with domain object</p>
+  <pre data-id="code">
+  <code class="ruby" data-trim data-noescape>
+  Cars::OpenDoorsAction.new(
+    car,
+    only_doors: [:front_left, :back_left]
+    should_close_other_doors_if_open: true
+  ).open_now!
+  </code>
+  </pre>
+</section>
+
+<section data-auto-animate>
   <p data-id="title">Examples objects</p>
   <pre data-id="code">
   <code class="ruby" data-trim data-noescape>
@@ -88,6 +143,10 @@
   <p>
   they can do only 1 thing.
   </p>
+</section>
+
+<section data-auto-animate>
+  <p>just plain Ruby objects 🤷🏽‍♂️</p>
 </section>
 
 <section>
