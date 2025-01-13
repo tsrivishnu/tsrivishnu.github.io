@@ -30,7 +30,7 @@ show_header: false
 
 All-In-One Talent Management — Collaborate on clear OKRs and goals, aligning your company and prioritizing performance. Close knowledge gaps and upskill your team with effective employee training courses.
 
-`Typescript` `Kubernetes` `NATS` `NestJS`
+`Typescript` `Kubernetes` `NATS` `NestJS` `React`
 
 #### [Zavvy](https://www.zavvy.io)
 
