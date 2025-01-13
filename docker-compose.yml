@@ -8,12 +8,7 @@ services:
     environment:
       - "BUNDLE_PATH=/app/.bundle"
     volumes:
-      - type: bind
-        source: $PWD
-        target: /app
-        volume:
-          nocopy: true
-        consistency: cached
+      - .:/app
     tty: true
     working_dir: "/app"
     command: "bundle exec jekyll serve -H 0.0.0.0"

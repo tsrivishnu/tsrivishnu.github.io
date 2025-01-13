@@ -11,14 +11,12 @@ show_header: false
 <h3 align="center">Sri Vishnu Totakura</h3>
 
 <p align="center">
-  Tech Enthusiast, Ruby Engineer, Munich, Planet Earth
+  Founding CTO & Engineer leader, Munich, Planet Earth
   <br>
   <br>
   <a href="https://github.com/tsrivishnu">Github</a>
   ·
   <a href="https://www.linkedin.com/in/tsrivishnu/">LinkedIn</a>
-  ·
-  <a href="https://twitter.com/tsrivishnu">Twitter</a>
   <br/>
   <br/>
   <a href="/presentations">Presentations/Talks</a>
@@ -27,6 +25,12 @@ show_header: false
 </p>
 
 ### Projects
+
+#### [Deel Engage](https://www.deel.com/engage/)
+
+All-In-One Talent Management — Collaborate on clear OKRs and goals, aligning your company and prioritizing performance. Close knowledge gaps and upskill your team with effective employee training courses.
+
+`Typescript` `Kubernetes` `NATS` `NestJS`
 
 #### [Zavvy](https://www.zavvy.io)
 
