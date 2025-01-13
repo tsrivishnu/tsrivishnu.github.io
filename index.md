@@ -11,7 +11,7 @@ show_header: false
 <h3 align="center">Sri Vishnu Totakura</h3>
 
 <p align="center">
-  Founding CTO & Engineer leader, Munich, Planet Earth
+  Founding CTO & Engineering leader, Munich, Planet Earth
   <br>
   <br>
   <a href="https://github.com/tsrivishnu">Github</a>
